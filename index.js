@@ -23,6 +23,8 @@ class TextRecognizer {
 
     getPhrase() {
         return this.command
+
+
     }
 }
 app.use(express.json())    // <==== parse request body as JSON
