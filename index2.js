@@ -17,12 +17,21 @@ const getWeather = () => {
         fetch(url, config)
             .then(async res => {
                 const data = await res.json()
-                console.log(data.fact)
-                console.log(data.forecasts[0])
+                console.log( Number (new Date(data.now * 1000).toLocaleTimeString().substr(0, 2)))
+                var date = new Date(data.now * 1000).getHours();
+
+                var hours = date.getHours();
+                console.log(hours)
+                // console.log(data.forecasts[0])
                 resolve(data)
             })
     }))
 }
 
 
-getWeather()
+const  A = async () =>{
+    const a = await getWeather()
+    console.log(a)
+}
+
+A()

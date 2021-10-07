@@ -19,8 +19,8 @@ const getWeather = () => {
                 const data = await res.json();
                 const fact = data.fact;
                 const forecastsNow = data.forecasts[0]
-                const timeNow = new Date(data.now * 1000).toLocaleTimeString().substr(0, 2);
-
+                const date = new Date(data.now * 1000);
+                const timeNow = date.getHours() + 3;
                 const stepOfHourWeather = (() => {
                         if (timeNow >= 0 && timeNow < 6) {
                             return {
@@ -230,7 +230,7 @@ const generatingAForecast = (part, timeOfDay) => {
     })()
 
 
-    return `Сегодня ${partName} ожидается ${condition}. Температура ощущается как ${part.temp} градусов, ${wind_speed}.`
+    return `Сегодня ${partName} ожидается ${condition}. Температура ${part.temp}°C, ощущается как ${part.feels_like}°C, градусов, ${wind_speed}.`
 
 }
 
@@ -250,7 +250,6 @@ const response =  ({
                             timeOfDay = [],
                             stepOfTheHeader
                         }) => {
-    console.log(text)
     return {
         'response': {
             'text': text,
@@ -441,7 +440,7 @@ app.post("/alice", async function (req, res) {
 });
 
 
-app.listen(5000, function () {
+app.listen(3000, function () {
     console.log("Сервер ожидает подключения...");
 });
 
